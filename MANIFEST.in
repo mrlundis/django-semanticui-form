@@ -1,2 +1,3 @@
 include README.rst
 graft semanticuiform/templates
+graft semanticuiform/static
