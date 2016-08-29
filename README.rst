@@ -49,6 +49,11 @@ tag to ``|semanticui_inline``.::
         <button class="ui button" type="submit">Submit</button>
         </form>
 
+To automatically enable some features with javascript, include the script after
+your ``<body>``::
+
+    <script src="{% static 'semanticui/auto-enable.js' %}"></script>
+
 
 Demo
 =====
