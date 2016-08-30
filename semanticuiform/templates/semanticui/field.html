@@ -76,11 +76,11 @@
             {% endif %}
 
 			<div class="three fields">
-            {% for sub_field in field %}
+				{% for sub_field in field|split_date_select %}
 				<div class="field">
 					{{ sub_field }}
 				</div>
-            {% endfor %}
+				{% endfor %}
 			</div>
 
             {% for error in field.errors %}
@@ -102,21 +102,15 @@
 
             {% if 'icon' in field.field.widget.attrs %}
                 <div class="ui icon input">
-                    {{ field }}
+                    {{ field|add_attrs }}
                     <i class="ui icon {{ field.field.widget.attrs.icon }}"></i>
                 </div>
             {% else %}
-                {{ field }}
+                {{ field|add_attrs }}
             {% endif %}
 
             {% for error in field.errors %}
                 <span class="ui pointing red basic label {{ form.error_css_class }}">{{ error }}</span>
             {% endfor %}
-
-            {% if field.help_text %}
-                <div class="label">
-                    {{ field.help_text|safe }}
-                </div>
-            {% endif %}
         </div>
     {% endif %}

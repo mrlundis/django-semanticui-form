@@ -2,6 +2,8 @@ from django import forms
 from django.template import Context
 from django.template.loader import get_template
 from django import template
+from django.utils.safestring import mark_safe
+import re
 
 from semanticuiform import config
 
@@ -86,6 +88,13 @@ def render(element, markup_classes, is_inline):
 
 
 @register.filter
+def add_attrs(field):
+    if field.help_text:
+        field.field.widget.attrs['placeholder'] = field.help_text
+    return field
+
+
+@register.filter
 def is_checkbox(field):
     return isinstance(field.field.widget, forms.CheckboxInput)
 
@@ -103,6 +112,12 @@ def is_multiple_select(field):
 @register.filter
 def is_date_select(field):
     return isinstance(field.field.widget, forms.SelectDateWidget)
+
+@register.filter
+def split_date_select(field):
+    r = re.compile(r'(<select.*</select>)[^<]+(<select.*</select>)[^<]+(<select.*</select>)', re.DOTALL)
+    m = r.search(field.__html__())
+    return (mark_safe(m.group(1)), mark_safe(m.group(2)), mark_safe(m.group(3)))
 
 
 @register.filter
