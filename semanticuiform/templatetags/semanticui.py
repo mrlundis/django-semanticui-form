@@ -101,6 +101,11 @@ def is_multiple_select(field):
 
 
 @register.filter
+def is_date_select(field):
+    return isinstance(field.field.widget, forms.SelectDateWidget)
+
+
+@register.filter
 def is_radio(field):
     return isinstance(field.field.widget, forms.RadioSelect)
 

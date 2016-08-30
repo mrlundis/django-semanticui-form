@@ -1,1 +1,6 @@
-$('.ui.dropdown').dropdown();
+function enableSemanticui() {
+	$('.ui.dropdown').dropdown();
+}
+
+enableSemanticui();
+
